@@ -27,6 +27,7 @@ namespace AddressBookSystem
             choice = Convert.ToChar(Console.ReadLine());
             while (choice == 'y' || choice == 'Y')
             {
+                bool exist = false;
                 Person person = new Person();
 
                 Console.Write("\nEnter First Name : ");
@@ -52,23 +53,32 @@ namespace AddressBookSystem
 
                 Console.Write("Enter EmailId : ");
                 person.EmailId = Console.ReadLine();
-
-                People.Add(person);
-
+                foreach (var per in People.ToList())
+                {
+                    if (per.FirstName == person.FirstName && per.LastName == person.LastName && per.Addresses == person.Addresses && per.City == person.City && per.State == person.State && per.ZipCode == person.ZipCode && per.PhoneNumber == person.PhoneNumber && per.EmailId == person.EmailId) 
+                    {
+                        exist = true;
+                        Console.WriteLine("Contact  already present");
+                    }
+                }
+                if(exist == false)
+                {
+                    People.Add(person);
+                }
                 Console.Write("\nDo you wish to add new Contact ? (Y/N) : ");
                 choice = Convert.ToChar(Console.ReadLine());
             }
         }
         public static void PrintContact(Person person)
         {
-            Console.WriteLine("\nFirst Name : " + person.FirstName);
-            Console.WriteLine("Last Name : " + person.LastName);
-            Console.WriteLine("Address : " + person.Addresses);
-            Console.WriteLine("City : " + person.City);
-            Console.WriteLine("State : " + person.State);
-            Console.WriteLine("ZipCode : " + person.ZipCode);
+            Console.WriteLine("\nFirst Name   : " + person.FirstName);
+            Console.WriteLine("Last Name    : " + person.LastName);
+            Console.WriteLine("Address      : " + person.Addresses);
+            Console.WriteLine("City         : " + person.City);
+            Console.WriteLine("State        : " + person.State);
+            Console.WriteLine("ZipCode      : " + person.ZipCode);
             Console.WriteLine("Phone Number : " + person.PhoneNumber);
-            Console.WriteLine("EmailId : " + person.EmailId);
+            Console.WriteLine("EmailId      : " + person.EmailId);
             Console.WriteLine("\n-------------------------------------------");
         }
         public static void Modify()
