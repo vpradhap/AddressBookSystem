@@ -54,6 +54,7 @@ namespace AddressBookSystem
                 person.EmailId = Console.ReadLine();
 
                 People.Add(person);
+
                 Console.Write("\nDo you wish to add new Contact ? (Y/N) : ");
                 choice = Convert.ToChar(Console.ReadLine());
             }
@@ -145,6 +146,33 @@ namespace AddressBookSystem
                     Console.Write("\nDo you wish to Modify Contact ? (Y/N) : ");
                     choice = Convert.ToChar(Console.ReadLine());
                 }
+            }
+        }
+        public static void Delete()
+        {
+            char choice;
+            Console.Write("\nDo you wish to delete Contact ? (Y/N) : ");
+            choice = Convert.ToChar(Console.ReadLine());
+            while (choice == 'y' || choice == 'Y')
+            { 
+                Console.WriteLine("\nEnter the first name of a contact to delete : ");
+                string remove = Console.ReadLine();
+                bool exist = false;
+                foreach (var person in People.ToList())
+                {
+                    if (person.FirstName.ToUpper() == remove.ToUpper())
+                    {
+                    exist = true;
+                    People.Remove(person);
+                    Console.WriteLine("Contact is deleted");
+                    }
+                }
+                if(exist == false)
+                {
+                Console.WriteLine("Contact is not present");
+                }
+                Console.Write("\nDo you wish to delete Contact ? (Y/N) : ");
+                choice = Convert.ToChar(Console.ReadLine());
             }
         }
         public static void ListOfPeoples()
