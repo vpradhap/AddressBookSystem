@@ -23,7 +23,7 @@ namespace AddressBookSystem
         public static void Contact()
         {
             char choice;
-            Console.Write("\nDo you wish to add new Contact (Y/N) : ");
+            Console.Write("\nDo you wish to add new Contact ? (Y/N) : ");
             choice = Convert.ToChar(Console.ReadLine());
             while (choice == 'y' || choice == 'Y')
             {
@@ -54,13 +54,13 @@ namespace AddressBookSystem
                 person.EmailId = Console.ReadLine();
 
                 People.Add(person);
-                Console.Write("\nDo you wish to add new Contact (Y/N) : ");
+                Console.Write("\nDo you wish to add new Contact ? (Y/N) : ");
                 choice = Convert.ToChar(Console.ReadLine());
             }
         }
         public static void PrintContact(Person person)
         {
-            Console.WriteLine("First Name : " + person.FirstName);
+            Console.WriteLine("\nFirst Name : " + person.FirstName);
             Console.WriteLine("Last Name : " + person.LastName);
             Console.WriteLine("Address : " + person.Addresses);
             Console.WriteLine("City : " + person.City);
@@ -69,6 +69,83 @@ namespace AddressBookSystem
             Console.WriteLine("Phone Number : " + person.PhoneNumber);
             Console.WriteLine("EmailId : " + person.EmailId);
             Console.WriteLine("\n-------------------------------------------");
+        }
+        public static void Modify()
+        {   
+            if (People.Count != 0)
+            {
+                char choice;
+                Console.Write("\nDo you wish to Modify Contact ? (Y/N) : ");
+                choice = Convert.ToChar(Console.ReadLine());
+                while (choice == 'y' || choice == 'Y')
+                {
+                    Console.Write("\nEnter the first name of a contact to modify : ");
+                    string Modified = Console.ReadLine();
+                    bool exist = false;
+                    foreach (var person in People)
+                    {
+                        if (person.FirstName.ToUpper() == Modified.ToUpper())
+                        {
+                            exist = true;
+                            Console.WriteLine("\nChoose the field to modify ");
+                            Console.WriteLine("\nEnter 1 to Change First name ");
+                            Console.WriteLine("Enter 2 to Change Last name ");
+                            Console.WriteLine("Enter 3 to Change Address ");
+                            Console.WriteLine("Enter 4 to Change City ");
+                            Console.WriteLine("Enter 5 to Change State ");
+                            Console.WriteLine("Enter 6 to Change Zipcode ");
+                            Console.WriteLine("Enter 7 to Change Phone Number ");
+                            Console.WriteLine("Enter 8 to Change EmailId ");
+                            Console.Write("\nYour Choice : ");
+                            string Check = Console.ReadLine();
+                            switch (Check)
+                            {
+                                case "1":
+                                    Console.Write("\nEnter the New First Name: ");
+                                    person.FirstName = Console.ReadLine();
+                                    break;
+                                case "2":
+                                    Console.Write("\nEnter the New Last Name: ");
+                                    person.LastName = Console.ReadLine();
+                                    break;
+                                case "3":
+                                    Console.Write("\nEnter the New Address: ");
+                                    person.Addresses = Console.ReadLine();
+                                    break;
+                                case "4":
+                                    Console.Write("\nEnter the New City: ");
+                                    person.City = Console.ReadLine();
+                                    break;
+                                case "5":
+                                    Console.Write("\nEnter the New State: ");
+                                    person.State = Console.ReadLine();
+                                    break;
+                                case "6":
+                                    Console.Write("\nEnter the New Pin Code : ");
+                                    person.ZipCode = Console.ReadLine();
+                                    break;
+                                case "7":
+                                    Console.Write("\nEnter the New Phone Number : ");
+                                    person.PhoneNumber = Console.ReadLine();
+                                    break;
+                                case "8":
+                                    Console.Write("\nEnter the New EmailId : ");
+                                    person.EmailId = Console.ReadLine();
+                                    break;
+                                default:
+                                    Console.WriteLine("\n\tEnter a valid choice");
+                                    break;
+                            }
+                        }
+                    }
+                    if(exist == false)
+                    {
+                        Console.WriteLine("\nEnter the valid name");
+                    }
+                    Console.Write("\nDo you wish to Modify Contact ? (Y/N) : ");
+                    choice = Convert.ToChar(Console.ReadLine());
+                }
+            }
         }
         public static void ListOfPeoples()
         {
