@@ -22,33 +22,41 @@ namespace AddressBookSystem
         }
         public static void Contact()
         {
-            Person person = new Person();
+            char choice;
+            Console.Write("\nDo you wish to add new Contact (Y/N) : ");
+            choice = Convert.ToChar(Console.ReadLine());
+            while (choice == 'y' || choice == 'Y')
+            {
+                Person person = new Person();
 
-            Console.Write("\nEnter First Name : ");
-            person.FirstName = Console.ReadLine();
+                Console.Write("\nEnter First Name : ");
+                person.FirstName = Console.ReadLine();
 
-            Console.Write("Enter Last Name : ");
-            person.LastName = Console.ReadLine();
+                Console.Write("Enter Last Name : ");
+                person.LastName = Console.ReadLine();
 
-            Console.Write("Enter Address : ");
-            person.Addresses = Console.ReadLine();
+                Console.Write("Enter Address : ");
+                person.Addresses = Console.ReadLine();
 
-            Console.Write("Enter City : ");
-            person.City = Console.ReadLine();
+                Console.Write("Enter City : ");
+                person.City = Console.ReadLine();
 
-            Console.Write("Enter State : ");
-            person.State = Console.ReadLine();
+                Console.Write("Enter State : ");
+                person.State = Console.ReadLine();
 
-            Console.Write("Enter ZipCode : ");
-            person.ZipCode = Console.ReadLine();
+                Console.Write("Enter ZipCode : ");
+                person.ZipCode = Console.ReadLine();
 
-            Console.Write("Enter Phone Number : ");
-            person.PhoneNumber = Console.ReadLine();
+                Console.Write("Enter Phone Number : ");
+                person.PhoneNumber = Console.ReadLine();
 
-            Console.Write("Enter EmailId : ");
-            person.EmailId = Console.ReadLine();
+                Console.Write("Enter EmailId : ");
+                person.EmailId = Console.ReadLine();
 
-            People.Add(person);
+                People.Add(person);
+                Console.Write("\nDo you wish to add new Contact (Y/N) : ");
+                choice = Convert.ToChar(Console.ReadLine());
+            }
         }
         public static void PrintContact(Person person)
         {
@@ -64,6 +72,13 @@ namespace AddressBookSystem
         }
         public static void ListOfPeoples()
         {
+            if (People.Count == 0)
+            {
+                Console.WriteLine("\nYour Address book is Empty");
+                Console.WriteLine("\n\tPress Any key To Exit");
+                Console.ReadKey();
+                return;
+            }
             Console.WriteLine("\nContacts In The Address Book:\n");
             foreach (var person in People)
             {
