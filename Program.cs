@@ -1,7 +1,9 @@
 ﻿using AddressBookSystem;
 
 Console.WriteLine("\n\t\"Welcome To Address Book Program\"");
-AddressBook.Contact();
-AddressBook.Modify();
-AddressBook.Delete();
-AddressBook.ListOfPeoples();
+AddressBookSelection.AddressBookAdding();
+AddressBookSelection.AddressBookSelect();
+//AddressBookSelection.EditDetailsOfAddressBook();
+//AddressBookSelection.DeleteContactsOfAddressBook();
+AddressBookSelection.DeletingAddressBook();
+AddressBookSelection.DisplayingAddressBooks();

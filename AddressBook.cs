@@ -11,6 +11,7 @@ namespace AddressBookSystem
         public static List<Person> People = new List<Person>();
         public class Person
         {
+            public string Addressbookname { get; set; }
             public string FirstName { get; set; }
             public string LastName { get; set; }
             public string Addresses { get; set; }
@@ -20,7 +21,7 @@ namespace AddressBookSystem
             public string PhoneNumber { get; set; }
             public string EmailId { get; set; }
         }
-        public static void Contact()
+        public static void Contact(string addressbookname)
         {
             char choice;
             Console.Write("\nDo you wish to add new Contact ? (Y/N) : ");
@@ -30,35 +31,38 @@ namespace AddressBookSystem
                 bool exist = false;
                 Person person = new Person();
 
-                Console.Write("\nEnter First Name : ");
+                Console.Write("\nEnter First Name   : ");
                 person.FirstName = Console.ReadLine();
 
-                Console.Write("Enter Last Name : ");
+                Console.Write("Enter Last Name    : ");
                 person.LastName = Console.ReadLine();
 
-                Console.Write("Enter Address : ");
+                Console.Write("Enter Address      : ");
                 person.Addresses = Console.ReadLine();
 
-                Console.Write("Enter City : ");
+                Console.Write("Enter City         : ");
                 person.City = Console.ReadLine();
 
-                Console.Write("Enter State : ");
+                Console.Write("Enter State        : ");
                 person.State = Console.ReadLine();
 
-                Console.Write("Enter ZipCode : ");
+                Console.Write("Enter ZipCode      : ");
                 person.ZipCode = Console.ReadLine();
 
                 Console.Write("Enter Phone Number : ");
                 person.PhoneNumber = Console.ReadLine();
 
-                Console.Write("Enter EmailId : ");
+                Console.Write("Enter EmailId      : ");
                 person.EmailId = Console.ReadLine();
+
+                person.Addressbookname = addressbookname;
+
                 foreach (var per in People.ToList())
                 {
-                    if (per.FirstName == person.FirstName && per.LastName == person.LastName && per.Addresses == person.Addresses && per.City == person.City && per.State == person.State && per.ZipCode == person.ZipCode && per.PhoneNumber == person.PhoneNumber && per.EmailId == person.EmailId) 
+                    if (per.FirstName == person.FirstName && per.LastName == person.LastName && per.Addresses == person.Addresses && per.City == person.City && per.State == person.State && per.ZipCode == person.ZipCode && per.PhoneNumber == person.PhoneNumber && per.EmailId == person.EmailId && per.Addressbookname == person.Addressbookname) 
                     {
                         exist = true;
-                        Console.WriteLine("Contact  already present");
+                        Console.WriteLine("\nContact already present");
                     }
                 }
                 if(exist == false)
@@ -160,47 +164,61 @@ namespace AddressBookSystem
         }
         public static void Delete()
         {
-            char choice;
-            Console.Write("\nDo you wish to delete Contact ? (Y/N) : ");
-            choice = Convert.ToChar(Console.ReadLine());
-            while (choice == 'y' || choice == 'Y')
-            { 
-                Console.WriteLine("\nEnter the first name of a contact to delete : ");
-                string remove = Console.ReadLine();
-                bool exist = false;
-                foreach (var person in People.ToList())
-                {
-                    if (person.FirstName.ToUpper() == remove.ToUpper())
-                    {
-                    exist = true;
-                    People.Remove(person);
-                    Console.WriteLine("Contact is deleted");
-                    }
-                }
-                if(exist == false)
-                {
-                Console.WriteLine("Contact is not present");
-                }
+            if (People.Count != 0)
+            {
+                char choice;
                 Console.Write("\nDo you wish to delete Contact ? (Y/N) : ");
                 choice = Convert.ToChar(Console.ReadLine());
+                while (choice == 'y' || choice == 'Y')
+                {
+                    Console.Write("\nEnter the first name of a contact to delete : ");
+                    string remove = Console.ReadLine();
+                    bool exist = false;
+                    foreach (var person in People.ToList())
+                    {
+                        if (person.FirstName.ToUpper() == remove.ToUpper())
+                        {
+                            exist = true;
+                            People.Remove(person);
+                            Console.WriteLine("Contact is deleted");
+                        }
+                    }
+                    if (exist == false)
+                    {
+                        Console.WriteLine("Contact is not present");
+                    }
+                    Console.Write("\nDo you wish to delete Contact ? (Y/N) : ");
+                    choice = Convert.ToChar(Console.ReadLine());
+                }
             }
         }
-        public static void ListOfPeoples()
+        public static void ListOfPeoples(string name)
         {
-            if (People.Count == 0)
-            {
-                Console.WriteLine("\nYour Address book is Empty");
-                Console.WriteLine("\n\tPress Any key To Exit");
-                Console.ReadKey();
-                return;
-            }
-            Console.WriteLine("\nContacts In The Address Book:\n");
+            bool exist = false;
             foreach (var person in People)
             {
-                PrintContact(person);
+                if (exist == false && person.Addressbookname == name)
+                {
+                    exist = true;
+                }
             }
-            Console.WriteLine("\n\tPress Any key To Exit");
-            Console.ReadKey();
+            if (exist == true)
+            {
+                Console.WriteLine("\nAvailable contacts are : ");
+                foreach (var person in People)
+                {
+                    if (person.Addressbookname == name)
+                    {
+                        PrintContact(person);
+                    }   
+                }
+            }
+            else
+            {
+                Console.WriteLine("\nContacts list is empty ");
+                Console.WriteLine("\n-------------------------------------------");
+            }
+            
         }
     }
 }
