@@ -8,4 +8,5 @@ AddressBookSelection.AddressBookSelect();
 AddressBookSelection.DeletingAddressBook();
 AddressBook.SearchPerson();
 AddressBook.ViewPerson();
+AddressBook.PersonCount();
 AddressBookSelection.DisplayingAddressBooks();
