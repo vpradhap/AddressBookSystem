@@ -23,10 +23,10 @@ namespace AddressBookSystem
         }
         public static void Contact(string addressbookname)
         {
-            char choice;
+            string choice;
             Console.Write("\nDo you wish to add new Contact ? (Y/N) : ");
-            choice = Convert.ToChar(Console.ReadLine());
-            while (choice == 'y' || choice == 'Y')
+            choice = Console.ReadLine();
+            while (choice == "y" || choice == "Y")
             {
                 //bool exist = false;
                 Person person = new Person();
@@ -75,7 +75,7 @@ namespace AddressBookSystem
                     People.Add(person);
                 }
                 Console.Write("\nDo you wish to add new Contact ? (Y/N) : ");
-                choice = Convert.ToChar(Console.ReadLine());
+                choice = Console.ReadLine();
             }
         }
         public static void PrintContact(Person person)
@@ -94,10 +94,10 @@ namespace AddressBookSystem
         {   
             if (People.Count != 0)
             {
-                char choice;
+                string choice;
                 Console.Write("\nDo you wish to Modify Contact ? (Y/N) : ");
-                choice = Convert.ToChar(Console.ReadLine());
-                while (choice == 'y' || choice == 'Y')
+                choice = Console.ReadLine();
+                while (choice == "y" || choice == "Y")
                 {
                     Console.Write("\nEnter the first name of a contact to modify : ");
                     string Modified = Console.ReadLine();
@@ -163,7 +163,7 @@ namespace AddressBookSystem
                         Console.WriteLine("\nEnter the valid name");
                     }
                     Console.Write("\nDo you wish to Modify Contact ? (Y/N) : ");
-                    choice = Convert.ToChar(Console.ReadLine());
+                    choice = Console.ReadLine();
                 }
             }
         }
@@ -171,10 +171,10 @@ namespace AddressBookSystem
         {
             if (People.Count != 0)
             {
-                char choice;
+                string choice;
                 Console.Write("\nDo you wish to delete Contact ? (Y/N) : ");
-                choice = Convert.ToChar(Console.ReadLine());
-                while (choice == 'y' || choice == 'Y')
+                choice = Console.ReadLine();
+                while (choice == "y" || choice == "Y")
                 {
                     Console.Write("\nEnter the first name of a contact to delete : ");
                     string remove = Console.ReadLine();
@@ -193,7 +193,7 @@ namespace AddressBookSystem
                         Console.WriteLine("Contact is not present");
                     }
                     Console.Write("\nDo you wish to delete Contact ? (Y/N) : ");
-                    choice = Convert.ToChar(Console.ReadLine());
+                    choice = Console.ReadLine();
                 }
             }
         }
@@ -224,6 +224,58 @@ namespace AddressBookSystem
                 Console.WriteLine("\n-------------------------------------------");
             }
             
+        }
+        public static void SearchPerson()
+        {
+            if (People.Count != 0)
+            {
+                string choice;
+                Console.Write("\nDo you wish to search person in the Address Book ? (Y/N) : ");
+                choice = Console.ReadLine();
+                while (choice == "y" || choice == "Y")
+                {
+                    string input;
+                    Console.Write("\nEnter first name to search : ");
+                    string firstname = Console.ReadLine();
+                    Console.Write("Enter last name to search : ");
+                    string lastname = Console.ReadLine();
+                    Console.WriteLine("\nBy which medium do you wish to search ");
+                    Console.WriteLine("1 - City");
+                    Console.WriteLine("2 - State");
+                    Console.Write("Enter your choice : ");
+                    string option = Console.ReadLine();
+                    Person person = new Person();
+
+                    switch (option)
+                    {
+                        case "1":
+                            Console.Write("\nEnter the city name to search : ");
+                            input = Console.ReadLine();
+                            var matchingPerson = People.Where(x => x.FirstName == firstname && x.LastName == lastname && x.City == input).ToList();
+                            foreach (var match in matchingPerson)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Addressbook name : " + match.Addressbookname + "\n" + "First name : " + match.FirstName + "\n" + "Last name : " + match.LastName);
+                            }
+                            break;
+                        case "2":
+                            Console.Write("\nEnter the state name to search : ");
+                            input = Console.ReadLine();
+                            matchingPerson = People.Where(x => x.FirstName == firstname && x.LastName == lastname && x.State == input).ToList();
+                            foreach (var match in matchingPerson)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Addressbook name : " + match.Addressbookname + "\n" + "First name : " + match.FirstName + "\n" + "Last name : " + match.LastName);
+                            }
+                            break;
+                        default:
+                            Console.WriteLine("Invalid choice");
+                            break;
+                    }
+                    Console.Write("\nDo you wish to search person in the Address Book ? (Y/N) : ");
+                    choice = Console.ReadLine();
+                }
+            }  
         }
     }
 }
