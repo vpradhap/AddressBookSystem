@@ -28,7 +28,7 @@ namespace AddressBookSystem
             choice = Convert.ToChar(Console.ReadLine());
             while (choice == 'y' || choice == 'Y')
             {
-                bool exist = false;
+                //bool exist = false;
                 Person person = new Person();
 
                 Console.Write("\nEnter First Name   : ");
@@ -57,15 +57,20 @@ namespace AddressBookSystem
 
                 person.Addressbookname = addressbookname;
 
-                foreach (var per in People.ToList())
+                //foreach (var per in People.ToList())
+                //{
+                //    if (per.FirstName == person.FirstName && per.LastName == person.LastName && per.Addresses == person.Addresses && per.City == person.City && per.State == person.State && per.ZipCode == person.ZipCode && per.PhoneNumber == person.PhoneNumber && per.EmailId == person.EmailId && per.Addressbookname == person.Addressbookname) 
+                //    {
+                //exist = true;
+                //Console.WriteLine("\nContact already present");
+                //    }
+                //}
+                var matchingPerson = People.Where(x => x.FirstName == person.FirstName && x.LastName == person.LastName && x.Addressbookname == person.Addressbookname).ToList();
+                if (matchingPerson.Any())
                 {
-                    if (per.FirstName == person.FirstName && per.LastName == person.LastName && per.Addresses == person.Addresses && per.City == person.City && per.State == person.State && per.ZipCode == person.ZipCode && per.PhoneNumber == person.PhoneNumber && per.EmailId == person.EmailId && per.Addressbookname == person.Addressbookname) 
-                    {
-                        exist = true;
-                        Console.WriteLine("\nContact already present");
-                    }
+                    Console.WriteLine("\nContact already present");
                 }
-                if(exist == false)
+                else
                 {
                     People.Add(person);
                 }

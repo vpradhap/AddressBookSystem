@@ -41,7 +41,6 @@ namespace AddressBookSystem
         }
         public static void AddressBookSelect()
         {
-
             if (addressBookMapper.Count != 0)
             {
                 char choice;
@@ -103,7 +102,6 @@ namespace AddressBookSystem
                     Console.Write("\nDo you wish to delete Address Book ? (Y/N) : ");
                     choice = Convert.ToChar(Console.ReadLine());
                 }
-                
             }
         }
         public static void DisplayingAddressBooks()
@@ -123,7 +121,6 @@ namespace AddressBookSystem
                     Console.WriteLine("\nAddress book : " + dictionaryPair.Key);
                     AddressBook address = dictionaryPair.Value;
                     AddressBook.ListOfPeoples(dictionaryPair.Key);
-
                 }
                 Console.WriteLine("\n\tPress Any key To Exit");
                 Console.ReadKey();
