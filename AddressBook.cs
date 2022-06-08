@@ -277,5 +277,53 @@ namespace AddressBookSystem
                 }
             }  
         }
+        public static void ViewPerson()
+        {
+            if (People.Count != 0)
+            {
+                string choice;
+                Console.Write("\nDo you wish to view persons in the Address Book ? (Y/N) : ");
+                choice = Console.ReadLine();
+                while (choice == "y" || choice == "Y")
+                {
+                    string input; 
+                    Console.WriteLine("\nBy which medium do you wish to view ");
+                    Console.WriteLine("1 - City");
+                    Console.WriteLine("2 - State");
+                    Console.Write("Enter your choice : ");
+                    string option = Console.ReadLine();
+                    Person person = new Person();
+
+                    switch (option)
+                    {
+                        case "1":
+                            Console.Write("\nEnter the city name to search : ");
+                            input = Console.ReadLine();
+                            var matchingPerson = People.Where(x => x.City == input).ToList();
+                            foreach (var match in matchingPerson)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Addressbook name : " + match.Addressbookname + "\n" + "First name : " + match.FirstName + "\n" + "Last name : " + match.LastName);
+                            }
+                            break;
+                        case "2":
+                            Console.Write("\nEnter the state name to search : ");
+                            input = Console.ReadLine();
+                            matchingPerson = People.Where(x => x.State == input).ToList();
+                            foreach (var match in matchingPerson)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Addressbook name : " + match.Addressbookname + "\n" + "First name : " + match.FirstName + "\n" + "Last name : " + match.LastName);
+                            }
+                            break;
+                        default:
+                            Console.WriteLine("Invalid choice");
+                            break;
+                    }
+                    Console.Write("\nDo you wish to view persons in the Address Book ? (Y/N) : ");
+                    choice = Console.ReadLine();
+                }
+            }
+        }
     }
 }

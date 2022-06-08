@@ -7,4 +7,5 @@ AddressBookSelection.AddressBookSelect();
 //AddressBookSelection.DeleteContactsOfAddressBook();
 AddressBookSelection.DeletingAddressBook();
 AddressBook.SearchPerson();
+AddressBook.ViewPerson();
 AddressBookSelection.DisplayingAddressBooks();
