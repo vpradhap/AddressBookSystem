@@ -164,7 +164,16 @@ namespace AddressBookSystem
             foreach (KeyValuePair<string, AddressBook> dictionaryPair in addressBookMapper)
             {
                 AddressBook address = dictionaryPair.Value;
-                address.AddCotactsToCSVFile(dictionaryPair.Key);
+                address.AddContactsToCSVFile(dictionaryPair.Key);
+            }
+        }
+        public static void WriteContactsToJSONFile()
+        {
+            Console.WriteLine("\nWriting data to a JSON file");
+            foreach (KeyValuePair<string, AddressBook> dictionaryPair in addressBookMapper)
+            {
+                AddressBook address = dictionaryPair.Value;
+                address.AddContactsToJSONFile(dictionaryPair.Key);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using CsvHelper;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -399,7 +400,7 @@ namespace AddressBookSystem
                 }
             }
         }
-        public void AddCotactsToCSVFile(string addressBookName)
+        public void AddContactsToCSVFile(string addressBookName)
         {
             string path = @"D:\BridgeLabz\Regular Fellowship Program -146\Visual Studio 2022\Assignments\AddressBookSystem\AddressBookSystem\CSV data.csv";
             using (StreamWriter writer = new StreamWriter(path))
@@ -423,7 +424,7 @@ namespace AddressBookSystem
         }
         public static void ReadContactsFromCSVFile()
         {
-            Console.WriteLine("\nReading data from a csv file");
+            Console.WriteLine("\nReading data from a CSV file");
 
             string path = @"D:\BridgeLabz\Regular Fellowship Program -146\Visual Studio 2022\Assignments\AddressBookSystem\AddressBookSystem\CSV data.csv";
             if (File.Exists(path))
@@ -447,7 +448,39 @@ namespace AddressBookSystem
                     }
                 }
             }
+        }
+        public void AddContactsToJSONFile(string addressBookName)
+        {
+            string path = @"D:\BridgeLabz\Regular Fellowship Program -146\Visual Studio 2022\Assignments\AddressBookSystem\AddressBookSystem\JSON data.json";
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                using (JsonWriter jsonWriter = new JsonTextWriter(writer))
+                {
+                    serializer.Serialize(jsonWriter, People.ToList());
+                }
+            }
+        }
+        public static void ReadContactsFromJSONFile()
+        {
+            Console.WriteLine("\nReading data from a JSON file");
 
+            string path = @"D:\BridgeLabz\Regular Fellowship Program -146\Visual Studio 2022\Assignments\AddressBookSystem\AddressBookSystem\JSON data.json";
+            if (File.Exists(path))
+            {
+                List<Person> list = JsonConvert.DeserializeObject<List<Person>>(File.ReadAllText(path));
+                foreach (Person person in list)
+                {
+                    Console.WriteLine("\nFirst Name   : " + person.FirstName);
+                    Console.WriteLine("Last Name    : " + person.LastName);
+                    Console.WriteLine("Address      : " + person.Addresses);
+                    Console.WriteLine("City         : " + person.City);
+                    Console.WriteLine("State        : " + person.State);
+                    Console.WriteLine("ZipCode      : " + person.ZipCode);
+                    Console.WriteLine("Phone Number : " + person.PhoneNumber);
+                    Console.WriteLine("EmailId      : " + person.EmailId);
+                }
+            }
         }
     }
 }

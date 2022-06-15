@@ -1,0 +1,25 @@
+[
+  
+  {
+    "Addressbookname": "one",
+    "FirstName": "pradhap",
+    "LastName": "venkat",
+    "Addresses": "mettur",
+    "City": "salem",
+    "State": "tamilnadu",
+    "ZipCode": "636402",
+    "PhoneNumber": "1234587963",
+    "EmailId": "pradhapvenkat@gmail.com"
+  },
+  {
+    "Addressbookname": "two",
+    "FirstName": "ram",
+    "LastName": "kumar",
+    "Addresses": "mecheri",
+    "City": "salem",
+    "State": "tamilnadu",
+    "ZipCode": "636401",
+    "PhoneNumber": "4569712335",
+    "EmailId": "ramkumar@gmail.com"
+  }
+]
