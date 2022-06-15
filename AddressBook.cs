@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -396,6 +398,56 @@ namespace AddressBookSystem
                      }                    
                 }
             }
+        }
+        public void AddCotactsToCSVFile(string addressBookName)
+        {
+            string path = @"D:\BridgeLabz\Regular Fellowship Program -146\Visual Studio 2022\Assignments\AddressBookSystem\AddressBookSystem\CSV data.csv";
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                {
+                    foreach (Person person in People)
+                    {
+                        Console.WriteLine("\nFirst Name   : " + person.FirstName);
+                        Console.WriteLine("Last Name    : " + person.LastName);
+                        Console.WriteLine("Address      : " + person.Addresses);
+                        Console.WriteLine("City         : " + person.City);
+                        Console.WriteLine("State        : " + person.State);
+                        Console.WriteLine("ZipCode      : " + person.ZipCode);
+                        Console.WriteLine("Phone Number : " + person.PhoneNumber);
+                        Console.WriteLine("EmailId      : " + person.EmailId);
+                    }
+                    csv.WriteRecords(People);
+                }
+            }
+        }
+        public static void ReadContactsFromCSVFile()
+        {
+            Console.WriteLine("\nReading data from a csv file");
+
+            string path = @"D:\BridgeLabz\Regular Fellowship Program -146\Visual Studio 2022\Assignments\AddressBookSystem\AddressBookSystem\CSV data.csv";
+            if (File.Exists(path))
+            {
+                using (StreamReader reader = new StreamReader(path))
+                {
+                    using (CsvReader csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                    {
+                        var list = csv.GetRecords<Person>().ToList();
+                        foreach (Person person in list)
+                        {
+                            Console.WriteLine("\nFirst Name   : " + person.FirstName);
+                            Console.WriteLine("Last Name    : " + person.LastName);
+                            Console.WriteLine("Address      : " + person.Addresses);
+                            Console.WriteLine("City         : " + person.City);
+                            Console.WriteLine("State        : " + person.State);
+                            Console.WriteLine("ZipCode      : " + person.ZipCode);
+                            Console.WriteLine("Phone Number : " + person.PhoneNumber);
+                            Console.WriteLine("EmailId      : " + person.EmailId);
+                        }
+                    }
+                }
+            }
+
         }
     }
 }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CsvHelper;
+using System.Globalization;
 
 namespace AddressBookSystem
 {
@@ -21,7 +23,7 @@ namespace AddressBookSystem
                 string name = Console.ReadLine();
                 if (addressBookMapper.ContainsKey(name))
                 {
-                    int i=1;
+                    int i = 1;
                     Console.WriteLine("\nName already exist");
                     Console.Write("\nAvailable names are : ");
                     foreach (KeyValuePair<string, AddressBook> check in addressBookMapper)
@@ -54,10 +56,10 @@ namespace AddressBookSystem
                     string name = Console.ReadLine();
                     if (!addressBookMapper.ContainsKey(name))
                     {
-                        Console.Write("\nAddress book "+ name+" not found \n\nAvailable names are : ");
+                        Console.Write("\nAddress book " + name + " not found \n\nAvailable names are : ");
                         foreach (KeyValuePair<string, AddressBook> check in addressBookMapper)
                         {
-                            Console.Write(i+"."+check.Key+"  ");
+                            Console.Write(i + "." + check.Key + "  ");
                             i++;
                         }
                         Console.WriteLine("");
@@ -91,7 +93,7 @@ namespace AddressBookSystem
                         Console.Write("\nAddress book " + name + " not found \n\nAvailable names are : ");
                         foreach (KeyValuePair<string, AddressBook> check in addressBookMapper)
                         {
-                            Console.Write(i+"."+check.Key +"  ");
+                            Console.Write(i + "." + check.Key + "  ");
                             i++;
                         }
                         Console.WriteLine("");
@@ -127,7 +129,7 @@ namespace AddressBookSystem
                 Console.ReadKey();
             }
         }
-       
+
         public static void ReadFromTextFile()
         {
             string path = @"D:\BridgeLabz\Regular Fellowship Program -146\Visual Studio 2022\Assignments\AddressBookSystem\AddressBookSystem\ReadFile.txt";
@@ -153,6 +155,17 @@ namespace AddressBookSystem
                 address.AddContactsToTextFile(dictionaryPair.Key);
             }
             Console.WriteLine("\nContact details added to the file");
+        }
+
+        public static void WriteContactsToCSVFile()
+        {
+            Console.WriteLine("\nWriting data to a csv file");
+
+            foreach (KeyValuePair<string, AddressBook> dictionaryPair in addressBookMapper)
+            {
+                AddressBook address = dictionaryPair.Value;
+                address.AddCotactsToCSVFile(dictionaryPair.Key);
+            }
         }
     }
 }
