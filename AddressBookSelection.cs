@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -125,6 +126,33 @@ namespace AddressBookSystem
                 Console.WriteLine("\n\tPress Any key To Exit");
                 Console.ReadKey();
             }
+        }
+       
+        public static void ReadFromTextFile()
+        {
+            string path = @"D:\BridgeLabz\Regular Fellowship Program -146\Visual Studio 2022\Assignments\AddressBookSystem\AddressBookSystem\ReadFile.txt";
+            Console.WriteLine("\nReading data from a text file\n");
+            if (File.Exists(path))
+            {
+                using (StreamReader reader = File.OpenText(path))
+                {
+                    string line = "";
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        Console.WriteLine(line);
+                    }
+                }
+            }
+        }
+
+        public static void WriteToTextFile()
+        {
+            foreach (KeyValuePair<string, AddressBook> dictionaryPair in addressBookMapper)
+            {
+                AddressBook address = dictionaryPair.Value;
+                address.AddContactsToTextFile(dictionaryPair.Key);
+            }
+            Console.WriteLine("\nContact details added to the file");
         }
     }
 }

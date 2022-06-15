@@ -91,7 +91,7 @@ namespace AddressBookSystem
             Console.WriteLine("\n-------------------------------------------");
         }
         public static void Modify()
-        {   
+        {
             if (People.Count != 0)
             {
                 string choice;
@@ -158,7 +158,7 @@ namespace AddressBookSystem
                             }
                         }
                     }
-                    if(exist == false)
+                    if (exist == false)
                     {
                         Console.WriteLine("\nEnter the valid name");
                     }
@@ -215,7 +215,7 @@ namespace AddressBookSystem
                     if (person.Addressbookname == name)
                     {
                         PrintContact(person);
-                    }   
+                    }
                 }
             }
             else
@@ -223,7 +223,7 @@ namespace AddressBookSystem
                 Console.WriteLine("\nContacts list is empty ");
                 Console.WriteLine("\n-------------------------------------------");
             }
-            
+
         }
         public static void SearchPerson()
         {
@@ -274,7 +274,7 @@ namespace AddressBookSystem
                     Console.Write("\nDo you wish to search person in the Address Book ? (Y/N) : ");
                     choice = Console.ReadLine();
                 }
-            }  
+            }
         }
         public static void ViewPerson()
         {
@@ -285,7 +285,7 @@ namespace AddressBookSystem
                 choice = Console.ReadLine();
                 while (choice == "y" || choice == "Y")
                 {
-                    string input; 
+                    string input;
                     Console.WriteLine("\nBy which medium do you wish to view ");
                     Console.WriteLine("1 - City");
                     Console.WriteLine("2 - State");
@@ -345,7 +345,7 @@ namespace AddressBookSystem
                             Console.Write("\nEnter the city name to search : ");
                             input = Console.ReadLine();
                             var matchingPerson = People.Where(x => x.City == input).Count();
-                            Console.WriteLine("\nPerson's Count : "+matchingPerson);
+                            Console.WriteLine("\nPerson's Count : " + matchingPerson);
                             break;
                         case "2":
                             Console.Write("\nEnter the state name to search : ");
@@ -359,6 +359,41 @@ namespace AddressBookSystem
                     }
                     Console.Write("\nDo you wish to view persons count from the Address Book ? (Y/N) : ");
                     choice = Console.ReadLine();
+                }
+            }
+        }
+        public void AddContactsToTextFile(string name)
+        {
+            string path = @"D:\BridgeLabz\Regular Fellowship Program -146\Visual Studio 2022\Assignments\AddressBookSystem\AddressBookSystem\WriteFile.txt";
+            if (File.Exists(path))
+            {
+                using (StreamWriter sw = File.AppendText(path))
+                {
+                    /* foreach (Person person in People.ToList())
+                     {
+                         sw.WriteLine("\nAddress book : " + person.Addressbookname);
+                         sw.WriteLine("\nFirst Name   : " + person.FirstName);
+                         sw.WriteLine("Last Name    : " + person.LastName);
+                         sw.WriteLine("Address      : " + person.Addresses);
+                         sw.WriteLine("City         : " + person.City);
+                         sw.WriteLine("State        : " + person.State);
+                         sw.WriteLine("ZipCode      : " + person.ZipCode);
+                         sw.WriteLine("Phone Number : " + person.PhoneNumber);
+                         sw.WriteLine("EmailId      : " + person.EmailId);
+                     }*/
+                    var contactlist = People.ToList();
+                     foreach (var contact in contactlist)
+                     {
+                        sw.WriteLine("\nAddress book : " + contact.Addressbookname);
+                        sw.WriteLine("\nFirst Name   : " + contact.FirstName);
+                        sw.WriteLine("Address      : " + contact.Addresses);
+                        sw.WriteLine("Last Name    : " + contact.LastName);
+                        sw.WriteLine("City         : " + contact.City);
+                        sw.WriteLine("State        : " + contact.State);
+                        sw.WriteLine("ZipCode      : " + contact.ZipCode);
+                        sw.WriteLine("Phone Number : " + contact.PhoneNumber);
+                        sw.WriteLine("EmailId      : " + contact.EmailId);
+                     }                    
                 }
             }
         }
